@@ -54,15 +54,5 @@ COOL STUFF
 		</div>
 	</div>
 </div>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-6" style="background:red;height:200px;">
-			Text
-		</div>
-		<div class="col-md-6" style="background:green;height:300px;">
-			Burgers
-		</div>
-	</div>
-</div>
 </body>
 </html>
