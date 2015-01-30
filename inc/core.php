@@ -27,7 +27,7 @@ class BSH_core{
 					<h1>Bradley Study Helper</h1>
 					<form>
 						<div class="form-group">
-							<select name="dept" class="form-control">
+							<select name="dept" id="dept" class="form-control">
 							</select>
 						</div>
 						<div class="form-group">
@@ -42,16 +42,39 @@ class BSH_core{
 				</div>
 			</div>
 		</div>';
-
+		?>
+			<script>
+				$(function(){
+					//alert("Hello");
+					getDepartments();
+				});
+				function getDepartments(){
+					$.ajax({
+						url:"api.php?method=getDepartments",
+						type:"POST",
+						dataType:"JSON",
+						success:function(results){
+							for(i in results.departments){
+								$('#dept').append("<option value='"+results.departments[i].Abbreviation+"'>"+results.departments[i].LongName+"</option>");
+							}
+							
+						},
+						error:function(){
+							alert("Failed to get departments!");
+						}
+					});
+				}
+				
+			</script>
+		<?php
 	}
 
 	function getAllDepartments()
 	{
 		$this->db->query("SELECT * FROM departments");
 		$results = $this->db->fetch_all_assoc();
-		echo "<pre>"; 
-		var_dump($results);
-		echo "</pre>";
+		echo json_encode(array('success' => true, 'departments' => $results));
+		return true;
 	}
 
 	function getCoursesInDepartment()
