@@ -10,12 +10,12 @@ class BSH_core{
 
 	function getHeader()
 	{
-
+		require_once("inc/template/head.php");
 	}
 
 	function getFooter()
 	{
-
+		require_once("inc/template/foot.php");
 	}
 
 	function getClassSelector()
