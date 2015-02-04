@@ -56,8 +56,7 @@ class BSH_core{
 						success:function(results){
 							for(i in results.departments){
 								$('#dept').append("<option value='"+results.departments[i].Abbreviation+"'>"+results.departments[i].LongName+"</option>");
-							}
-							
+							}	
 						},
 						error:function(){
 							alert("Failed to get departments!");
