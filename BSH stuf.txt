@@ -10,3 +10,5 @@ Things needing to be done:
 
 -structure the page reached upon submission of department/class/section  information 
    -this page will need BootStrap styling also
+
+-Add to symbolic poem as is appropriate
