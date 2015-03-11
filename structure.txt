@@ -1,0 +1,24 @@
+3 DropDowns
+Major, Class Number, Section Number(Teacher)
+-needs to be updated every semester
+	-create a webcrawler
+	-start by hardcoding data
+
+DataBase Design
+Majors
+-Abbreviation
+-Long Name
+
+Courses
+-Unique ID
+-Major Abbreviation
+-Class Name
+-Class Number
+
+Class
+-Unique ID
+-Section
+-Teacher/Professor
+
+
+
