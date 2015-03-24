@@ -1,0 +1,12 @@
+Things needing to be done:
+
+-Next two fields need AJAX/JSON/PHP abilities to pull from the database
+   -Require event listeners to function
+
+-More BootStrap Styling
+
+-Database Filling
+   -someone could explain the Web Crawler that was added to the GitHub
+
+-structure the page reached upon submission of department/class/section  information 
+   -this page will need BootStrap styling also
