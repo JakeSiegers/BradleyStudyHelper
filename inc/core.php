@@ -21,27 +21,46 @@ class BSH_core{
 	function getClassSelector()
 	{
 		echo '
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>Bradley Study Helper</h1>
-					<form>
-						<div class="form-group">
-							<select name="dept" id="dept" class="form-control">
-							</select>
-						</div>
-						<div class="form-group">
-							<select name="class" class="form-control">
-							</select>
-						</div>
-						<div class="form-group">
-							<select name="section" class="form-control">
-							</select>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>';
+		
+    <!-- Header -->
+    <a name="about"></a>
+    <div class="intro-header">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1>Study Help</h1>
+                        <h3>Because you can\'t do it yourself</h3>
+                        <hr class="intro-divider">
+                        <ul class="list-inline intro-social-buttons">
+                            <li>
+                                <form>
+                                    <div class="form-group">
+                                        <select name="dept" id="dept" class="form-control">
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select name="class" class="form-control">
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select name="section" class="form-control">
+                                        </select>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.intro-header -->
+		';
 		?>
 			<script>
 				$(function(){

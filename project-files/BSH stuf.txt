@@ -1,5 +1,9 @@
 Things needing to be done:
 
+-installer
+
+-document install process notes
+
 -Next two fields need AJAX/JSON/PHP abilities to pull from the database
    -Require event listeners to function
 
@@ -10,3 +14,4 @@ Things needing to be done:
 
 -structure the page reached upon submission of department/class/section  information 
    -this page will need BootStrap styling also
+
