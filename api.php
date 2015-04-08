@@ -5,6 +5,9 @@
 		case'getDepartments':
 			$bshcore->getAllDepartments();
 			break;
+		case'getClasses':
+			$bshcore->getAllClasses();
+			break;
 	}
 
 ?>
