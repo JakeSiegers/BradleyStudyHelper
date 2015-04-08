@@ -80,21 +80,21 @@ class BSH_core{
 				}
 				
 				$(".form-control:first").change(function(){
-					
-				};)
+					getCoursesInDepartment($(".form-control:first").value);
+				});
 
-				function getDepartments(){
+				function getCoursesInDepartment(dept){
 					$.ajax({
-						url:"api.php?method=getDepartments",
+						url:"api.php?method=getCoursesInDepartment&dept="+dept,
 						type:"POST",
 						dataType:"JSON",
 						success:function(results){
-							for(i in results.departments){
-								$('#dept').append("<option value='"+results.departments[i].Abbreviation+"'>"+results.departments[i].LongName+"</option>");
-							}	
+							for(i in results.classes){
+								$('.form-control')[1].append("<option value='"+results.courses[i].ClassNumber+"'>"+results.departments[i].ClassName+"</option>");
+							}
 						},
 						error:function(){
-							alert("Failed to get departments!");
+							alert("Failed to get courses!");
 						}
 					});
 				}
@@ -110,9 +110,12 @@ class BSH_core{
 		return true;
 	}
 
-	function getCoursesInDepartment()
+	function getCoursesInDepartment($dept)
 	{
-
+		$this->db->query("SELECT * FROM courses WHERE DepartmentAbbreviation=".$dept);
+		$results = $this->db->fetch_all_assoc();
+		echo json_encode(array('success' => true, 'courses' => $results));
+		return true;
 	}
 
 	function getSectionsInCourse()

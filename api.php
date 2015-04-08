@@ -5,8 +5,8 @@
 		case'getDepartments':
 			$bshcore->getAllDepartments();
 			break;
-		case'getClasses':
-			$bshcore->getAllClasses();
+		case'getCoursesInDepartment':
+			$bshcore->getCoursesInDepartment($_GET['dept']);
 			break;
 	}
 
