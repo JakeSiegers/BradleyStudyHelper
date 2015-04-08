@@ -12,3 +12,8 @@ Stop forking!
 Cried the ancient master
 Two projects
 Surely spells disaster!
+
+SQL injection
+We don't want that! Yuck!
+But injection was avoided
+Hey Guys, We don't suck!
