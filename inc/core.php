@@ -60,7 +60,6 @@ class BSH_core{
 		?>
 			<script>
 				$(function(){
-					//alert("Hello");
 					getDepartments();
 				});
 				function getDepartments(){
@@ -71,7 +70,7 @@ class BSH_core{
 						success:function(results){
 							for(i in results.departments){
 								$('#dept').append("<option value='"+results.departments[i].Abbreviation+"'>"+results.departments[i].LongName+"</option>");
-							}	
+							}
 						},
 						error:function(){
 							alert("Failed to get departments!");
@@ -80,7 +79,7 @@ class BSH_core{
 				}
 				
 				$(".form-control:first").change(function(){
-					getCoursesInDepartment($(".form-control:first").value);
+					getCoursesInDepartment($(".form-control:first").val());
 				});
 
 				function getCoursesInDepartment(dept){
@@ -89,8 +88,9 @@ class BSH_core{
 						type:"POST",
 						dataType:"JSON",
 						success:function(results){
-							for(i in results.classes){
-								$('.form-control')[1].append("<option value='"+results.courses[i].ClassNumber+"'>"+results.departments[i].ClassName+"</option>");
+							$('select[name="class"]').html('');
+							for(i in results.courses){
+								$('select[name="class"]').append("<option value='"+results.courses[i].ClassNumber+"'>"+results.courses[i].ClassName+"</option>");
 							}
 						},
 						error:function(){
@@ -112,7 +112,7 @@ class BSH_core{
 
 	function getCoursesInDepartment($dept)
 	{
-		$this->db->query("SELECT * FROM courses WHERE DepartmentAbbreviation=".$dept);
+		$this->db->query("SELECT * FROM courses WHERE DepartmentAbbreviation=?", array($dept));
 		$results = $this->db->fetch_all_assoc();
 		echo json_encode(array('success' => true, 'courses' => $results));
 		return true;
