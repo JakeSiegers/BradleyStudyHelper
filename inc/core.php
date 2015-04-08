@@ -33,24 +33,20 @@ class BSH_core{
                         <h1>Study Help</h1>
                         <h3>Because you can\'t do it yourself</h3>
                         <hr class="intro-divider">
-                        <ul class="list-inline intro-social-buttons">
-                            <li>
-                                <form>
-                                    <div class="form-group">
-                                        <select name="dept" id="dept" class="form-control">
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <select name="class" class="form-control">
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <select name="section" class="form-control">
-                                        </select>
-                                    </div>
-                                </form>
-                            </li>
-                        </ul>
+                            <form>
+                                <div class="form-group">
+                                    <select name="dept" id="dept" class="form-control">
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="class" class="form-control">
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="section" class="form-control">
+                                    </select>
+                                </div>
+                            </form>
                     </div>
                 </div>
             </div>
