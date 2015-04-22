@@ -90,9 +90,10 @@ class BSH_core{
 						type:"POST",
 						dataType:"JSON",
 						success:function(results){
+							$('select[name="section"]').html('');
 							$('select[name="class"]').html('');
 							for(i in results.courses){
-								$('select[name="class"]').append("<option value='"+results.courses[i].ClassNumber+"'>"+results.courses[i].ClassName+"</option>");
+								$('select[name="class"]').append("<option value='"+results.courses[i].UniqueID+"'>"+results.courses[i].ClassName+"</option>");
 							}
 						},
 						error:function(){
@@ -113,7 +114,7 @@ class BSH_core{
 						success:function(results){
 							$('select[name="section"]').html('');
 							for(i in results.sections){
-								$('select[name="section"]').append("<option value='"+results.sections[i].ClassNumber+"'>"+results.courses[i].ClassName+"</option>");
+								$('select[name="section"]').append("<option value='"+results.sections[i].Section+"'>"+results.sections[i].Section+"</option>");
 							}
 						},
 						error:function(){
@@ -143,8 +144,10 @@ class BSH_core{
 
 	function getSectionsInCourse($uniqueCourseID)
 	{
-		$this->db->query("SELECT * FROM section WHERE uniqueCourseID=?", array($uniqueCourseID));
+		// echo 'alert("Things!");';
+		$this->db->query("SELECT * FROM sections WHERE UniqueCourseID=?", array($uniqueCourseID));
 		$results = $this->db->fetch_all_assoc();
+		// var_dump($results);
 		echo json_encode(array('success' => true, 'sections' => $results));
 		return true;
 	}
