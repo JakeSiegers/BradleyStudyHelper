@@ -1,78 +1,61 @@
 <?php
-	function crawl_dept($semester = '15SP')
-	{
-		$url = 'http://schedule.bradley.edu/scripts/schedule.dll?s='.$semester;
-		$dept = array();
-		$temp = '';
 
-		$dom = new DOMDocument('1.0');
-		@$dom->loadHTMLFile($url);
+	class BradleyScheduleCrawler {
+		public static function crawl_dept($semester = '15SP') {
+			$url = 'http://schedule.bradley.edu/scripts/schedule.dll?s='.$semester;
+			$dept = array();
+			$temp = '';
 
-		$raw_data = $dom->getElementsByTagName('a');
-		foreach($raw_data as $link)
-		{
-			/**
-			 * Takes 3 letter code of department and description that follows,
-			 * puts them in correct arrays.
-			 * sort of "queues" the code for the next loop to use
-			 */
-			if ( strlen($link->nodeValue) == 3 )
-			{
-				$temp = $link->nodeValue;
+			$dom = new DOMDocument('1.0');
+			@$dom->loadHTMLFile($url);
+
+			$raw_data = $dom->getElementsByTagName('a');
+			foreach($raw_data as $link) {
+				/**
+				 * Takes 3 letter code of department and description that follows,
+				 * puts them in correct arrays.
+				 * sort of "queues" the code for the next loop to use
+				 */
+				if ( strlen($link->nodeValue) == 3 ) {
+					$temp = $link->nodeValue;
+				}
+				else if ($temp) {
+					$dept[] = array('id' => $temp, 'desc' => $link->nodeValue);
+				}
 			}
-			else if ($temp)
-			{
-				$dept[] = array('id' => $temp, 'desc' => $link->nodeValue);
-			}
+
+			// Don't really know what to do with it yet.
+			echo '<pre>';
+			echo var_dump($dept);
+			echo '</pre>';
 		}
 
-		// Don't really know what to do with it yet.
-		echo '<pre>';
-		echo var_dump($dept);
-		echo '</pre>';
-	}
+		public static function crawl_class($semester = '15SP', $department) {
+	    $department = 'CS';
+			$url = 'http://schedule.bradley.edu/scripts/schedule.dll?s='.$semester.'&d='.$department;
+			$classes = array();
+			$temp = '';
 
-	function crawl_class($semester = '15SP', $department)
-	{
-    $department = 'CS';
-		$url = 'http://schedule.bradley.edu/scripts/schedule.dll?s='.$semester.'&d='.$department;
-		$classes = array();
-		$temp = '';
+			$dom = new DOMDocument('1.0');
+			$dom->loadHTMLFile($url);
+			$raw_data = $dom->getElementsByTagName('tr');
+			echo '<pre>';
+			foreach($raw_data as $x) {
+				$str = preg_replace('/[^\w]+/',' ', mb_convert_encoding($x->nodeValue, 'ASCII') ) . '<br>';
+				preg_match("/^.*$department([\d]{3})(.*)(\d+).*$/", $str, $matches);
 
-		$dom = new DOMDocument('1.0');
-		$dom->loadHTMLFile($url);
-		$a = new DOMXPath($dom);
+				preg_match("/^.(\d+)[\ R]+([MTuWFS]+)(\d \d{2}).*(\d \d{2}).*(\w{2}\d{3}) (.*)$/", $str, $matches2);
 
-		$raw_data = $a -> query("//*[contains(concat(' ', normalize-space(@class), ' '), ' course ')]");
-		$temp = [];
-    // get course info
-    for ($n = 0; $n < $raw_data->length; $n++)
-    {
-      $temp[] = $raw_data->item($n)->nodeValue;
-    }
-    //for ($i = 0; $i < $temp->length; $i++)
-    //{
-      echo var_dump($temp[0]) . "<br>";
-      echo var_dump( preg_split("/^.{2}/", $temp[0]) );
-    //}
-    
-    echo '<pre>';
-    echo var_dump($temp);
-			/*
-			if ( strlen($link->nodeValue) == 3 )
-			{
-				$temp = $link->nodeValue;
+				if (!empty($matches)) {
+					print_r($matches);
+				}
+				if (!empty($matches2)) {
+					print_r($matches2);
+				} else {
+					echo $str;
+				}
 			}
-			else if ($temp)
-			{
-				$dept[] = array('id' => $temp, 'desc' => $link->nodeValue);
-			}
+			echo '</pre>';
 		}
-
-		// Don't really know what to do with it yet.
-		echo '<pre>';
-		echo var_dump($dept);
-		echo '</pre>';
-		*/
 	}
 ?>
