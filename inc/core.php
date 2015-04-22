@@ -68,6 +68,8 @@ class BSH_core{
 						type:"POST",
 						dataType:"JSON",
 						success:function(results){
+							$('select[name="section"]').html('');
+							$('select[name="class"]').html('');
 							for(i in results.departments){
 								$('#dept').append("<option value='"+results.departments[i].Abbreviation+"'>"+results.departments[i].LongName+"</option>");
 							}
@@ -98,6 +100,27 @@ class BSH_core{
 						}
 					});
 				}
+				
+				$(".form-control").eq(1).change(function(){
+					getSectionsInCourse($(".form-control").eq(1).val());
+				});
+				
+				function getSectionsInCourse(course){
+					$.ajax({
+						url:"api.php?method=getSectionsInCourse&uniqueCourseID="+course,
+						type:"POST",
+						dataType:"JSON",
+						success:function(results){
+							$('select[name="section"]').html('');
+							for(i in results.sections){
+								$('select[name="section"]').append("<option value='"+results.sections[i].ClassNumber+"'>"+results.courses[i].ClassName+"</option>");
+							}
+						},
+						error:function(){
+							alert("Failed to get courses!");
+						}
+					});
+				}
 			</script>
 		<?php
 	}
@@ -118,9 +141,12 @@ class BSH_core{
 		return true;
 	}
 
-	function getSectionsInCourse()
+	function getSectionsInCourse($uniqueCourseID)
 	{
-
+		$this->db->query("SELECT * FROM section WHERE uniqueCourseID=?", array($uniqueCourseID));
+		$results = $this->db->fetch_all_assoc();
+		echo json_encode(array('success' => true, 'sections' => $results));
+		return true;
 	}
 
 }

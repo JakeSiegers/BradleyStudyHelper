@@ -8,6 +8,8 @@
 		case'getCoursesInDepartment':
 			$bshcore->getCoursesInDepartment($_GET['dept']);
 			break;
+		case'getSectionsInCourse':
+			$bshcore->getSectionsInCourse($_GET['uniqueCourseID']);
 	}
 
 ?>

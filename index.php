@@ -10,4 +10,3 @@ $bshcore->getFooter();
 
 ?>
 
-
